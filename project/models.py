@@ -11,44 +11,44 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
 
-class BlogIndexPage(Page):
+class ProjectIndexPage(Page):
     intro = RichTextField(blank=True)
 
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super().get_context(request)
-        blogpages = self.get_children().live().order_by('-first_published_at')
-        context['blogpages'] = blogpages
+        projectpages = self.get_children().live().order_by('-first_published_at')
+        context['projectpages'] = projectpages
         return context
 
 
-class BlogTagIndexPage(Page):
+class ProjectTagIndexPage(Page):
 
     def get_context(self, request):
 
         # Filter by tag
         tag = request.GET.get('tag')
-        blogpages = BlogPage.objects.filter(tags__name=tag)
+        projectpages = ProjectPage.objects.filter(tags__name=tag)
 
         # Update template context
         context = super().get_context(request)
-        context['blogpages'] = blogpages
+        context['projectpages'] = projectpages
         return context
 
 
-class BlogPageTag(TaggedItemBase):
+class ProjectPageTag(TaggedItemBase):
     content_object = ParentalKey(
-        'BlogPage',
+        'ProjectPage',
         related_name='tagged_items',
         on_delete=models.CASCADE
     )
 
 
-class BlogPage(Page):
+class ProjectPage(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
     body = RichTextField(blank=True)
-    tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
+    tags = ClusterTaggableManager(through=ProjectPageTag, blank=True)
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -66,15 +66,15 @@ class BlogPage(Page):
         MultiFieldPanel([
             FieldPanel('date'),
             FieldPanel('tags'),
-        ], heading="Blog information"),
+        ], heading="Project information"),
         FieldPanel('intro'),
         FieldPanel('body', classname="full"),
         InlinePanel('gallery_images', label="Gallery images"),
     ]
 
 
-class BlogPageGalleryImage(Orderable):
-    page = ParentalKey(BlogPage, on_delete=models.CASCADE,
+class ProjectPageGalleryImage(Orderable):
+    page = ParentalKey(ProjectPage, on_delete=models.CASCADE,
                        related_name='gallery_images')
     image = models.ForeignKey(
         'wagtailimages.Image', on_delete=models.CASCADE, related_name='+'

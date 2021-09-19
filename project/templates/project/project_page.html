@@ -2,7 +2,7 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}template-blogpage{% endblock %}
+{% block body_class %}template-projectpage{% endblock %}
 
 {% block content %}
 {% if page.tags.all.count %}
@@ -28,6 +28,6 @@
         </div>
     {% endfor %}
 
-    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+    <p><a href="{{ page.get_parent.url }}">Return to projects</a></p>
 
 {% endblock %}

@@ -2,14 +2,14 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}template-blogindexpage{% endblock %}
+{% block body_class %}template-projectindexpage{% endblock %}
 
 {% block content %}
     <h1>{{ page.title }}</h1>
 
     <div class="intro">{{ page.intro|richtext }}</div>
 
-    {% for post in blogpages %}
+    {% for post in projectpages %}
         {% with post=post.specific %}
             <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
 
