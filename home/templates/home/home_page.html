@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}template-homepage{% endblock %}
+{% block body_class %}main{% endblock %}
 
 {% block content %}
     {{ page.body|richtext }}
+
+    {% with page.image as img %}
+    {% if img %}
+        {% image img original as tmp_photo %}
+        <div class="parallax" style="background-image: url({{ tmp_photo.url }})"></div>
+    {% endif %}       
+    {% endwith %}
 {% endblock %}

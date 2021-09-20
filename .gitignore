@@ -29,3 +29,14 @@ client/node_modules
 
 ### vscode
 .vscode
+
+media/images/*
+static/admin/*
+static/wagtailadmin/*
+static/wagtailimages/*
+static/wagtailsnippets/*
+static/wagtaildocs/*
+static/wagtailembeds/*
+static/wagtailusers/*
+static/wagtailsearch/*
+static/wagtailredirects/*
