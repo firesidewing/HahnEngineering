@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load wagtailcore_tags %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/subscribe.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="subscribe-grid layered-box">
+    {{ page.intro|richtext }}
+    <form action="{% pageurl page %}" method="POST" class="layered-box">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Subscribe">
+    </form>
+</div>
+    
+{% endblock %}
