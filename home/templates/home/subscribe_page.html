@@ -2,8 +2,6 @@
 
 {% load static %}
 
-{% load wagtailcore_tags %}
-
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% block extra_css %}
@@ -11,6 +9,14 @@
 {% endblock %}
 
 {% block content %}
+
+{% with page.image as img %}
+{% if img %}
+    {% image img original as tmp_photo %}
+    <div class="parallax" style="background-image: url({{ tmp_photo.url }})"></div>
+{% endif %}       
+{% endwith %}
+
 <div class="subscribe-grid layered-box">
     {{ page.intro|richtext }}
     <form action="{% pageurl page %}" method="POST" class="layered-box">

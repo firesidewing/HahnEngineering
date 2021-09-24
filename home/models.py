@@ -1,5 +1,8 @@
 from django.db import models
 
+from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.images.models import Image
+
 from wagtail.core.models import Page
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (
@@ -11,6 +14,15 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 
 from wagtail.core.fields import RichTextField
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
+
+
+@register_setting
+class SiteSettings(BaseSetting):
+    logo = models.OneToOneField(Image, null=True, blank=True,
+                                on_delete=models.SET_NULL, related_name='+', verbose_name='Business logo')
+    panels = [
+        ImageChooserPanel('logo'),
+    ]
 
 
 class HomePage(Page):
@@ -38,9 +50,17 @@ class SubscribeField(AbstractFormField):
 class SubscribePage(AbstractEmailForm):
     intro = RichTextField(blank=True)
     thank_you_text = RichTextField(blank=True)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
 
     content_panels = AbstractEmailForm.content_panels + [
         FormSubmissionsPanel(),
+        ImageChooserPanel('image'),
         FieldPanel('intro', classname="full"),
         InlinePanel('form_fields', label="Subscribe fields"),
         FieldPanel('thank_you_text', classname="full"),

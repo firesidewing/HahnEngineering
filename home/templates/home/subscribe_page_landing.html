@@ -1,1 +1,28 @@
-<div>test</div>
+{% extends 'base.html' %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/subscribe.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{% with page.image as img %}
+{% if img %}
+    {% image img original as tmp_photo %}
+    <div class="parallax" style="background-image: url({{ tmp_photo.url }})"></div>
+{% endif %}       
+{% endwith %}
+
+<div class="subscribe-grid">
+    <div class="box layered-box">
+        <p>
+            {{ self.thank_you_text|richtext }}
+        </p>
+    </div>    
+</div>
+
+{% endblock %}
