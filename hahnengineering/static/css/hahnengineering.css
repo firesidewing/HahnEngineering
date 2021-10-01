@@ -78,91 +78,8 @@ body {
   margin: 0;
 }
 
-nav {
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: rgba(255, 255, 255, 0.08);
-
-  display: flex;
-  grid-gap: 1rem;
-  height: 8vh;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  grid-gap: 1rem;
-  width: 100%;
-  max-width: 1600px;
-  justify-content: end;
-  align-items: center;
-
-  margin: 1rem 3rem;
-}
-
-nav a {
-  text-decoration: none;
-  color: var(--grey-100);
-  background-color: rgba(0, 0, 0, 0);
-  transition: color 0.25s;
-  font-weight: 400;
-}
-
 nav a:hover {
   color: var(--orange);
-}
-
-.nav-link {
-  margin: 0rem 1rem;
-}
-
-.nav-social {
-  fill: var(--orange);
-  transition: fill 0.25s;
-}
-.nav-social:hover {
-  fill: var(--grey-000);
-}
-
-footer {
-  background-color: #181f2a;
-
-  display: grid;
-  grid-gap: 1rem;
-  justify-items: center;
-
-  padding: 2rem;
-}
-
-footer .social {
-  grid-template-columns: auto auto auto;
-}
-
-footer .social a {
-  background-color: var(--orange);
-  border-radius: 10rem;
-  padding: 0.25rem 0.75rem;
-}
-
-footer .social svg {
-  fill: var(--grey-000);
-}
-
-footer > div {
-  display: grid;
-  grid-gap: 1rem;
-}
-
-footer .info {
-  color: var(--grey-000);
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  width: 100%;
-  text-align: center;
-}
-
-footer .info > div {
-  display: grid;
-  grid-gap: 0.5rem;
 }
 
 .info a {
@@ -175,6 +92,11 @@ footer .info > div {
 
 .info a:hover {
   color: var(--orange);
+}
+
+.social {
+  color: var(--orange);
+  fill: var(--orange);
 }
 
 .parallax {
@@ -193,4 +115,36 @@ footer .info > div {
   box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
     0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
     0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+}
+
+.gg-facebook {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs, 1));
+  width: 20px;
+  height: 20px;
+}
+.gg-facebook::after,
+.gg-facebook::before {
+  content: "";
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+}
+.gg-facebook::before {
+  width: 8px;
+  height: 20px;
+  border-left: 4px solid;
+  border-top: 4px solid;
+  border-top-left-radius: 5px;
+  left: 6px;
+}
+.gg-facebook::after {
+  width: 10px;
+  height: 4px;
+  background: currentColor;
+  top: 7px;
+  left: 4px;
+  transform: skew(-5deg);
 }
